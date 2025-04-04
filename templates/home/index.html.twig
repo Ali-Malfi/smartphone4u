@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Smartphones{% endblock %}
 
 {% block body %}
 <style>
@@ -8,13 +8,48 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Smartphones</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/xampp/htdocs/smartphone4u/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/xampp/htdocs/smartphone4u/templates/home/index.html.twig</code></li>
-    </ul>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Vendor</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Memory</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Picture</th>
+                    <th scope="col">details</th>
+                    <th scope="col">update</th>
+                    <th scope="col">delete</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for smartphone in smartphones %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ smartphone.vendor.name }}</td>
+                    <td>{{ smartphone.type }}</td>
+                    <td>{{ smartphone.memory }}</td>
+                    <td>{{ smartphone.color }}</td>
+                    <td>{{ smartphone.price }}</td>
+                    <td>{{ smartphone.description }}</td>
+                    <td>{{ smartphone.picture }}</td>
+                    <td><a href="{{ path('app_smartphone_update', { 'id': smartphone.id }) }}" class="btn btn-dark">update</a></td>
+                    <td><a href="{{ path('app_smartphone_delete', { 'id': smartphone.id }) }}" class="btn btn-dark">delete</a></td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path('app_smartphone') }}" class="btn btn-dark">Insert</a>
+        </div>
+    </div>
 </div>
 {% endblock %}

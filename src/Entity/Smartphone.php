@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\SmartphoneRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: SmartphoneRepository::class)]
 class Smartphone
@@ -14,19 +16,25 @@ class Smartphone
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $vendor = null;
+
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+
     private ?string $type = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Positive]
     private ?int $memory = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $color = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 7, scale: 2)]
+    #[Assert\NotBlank]
+    #[Assert\Positive]
     private ?string $price = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -35,22 +43,15 @@ class Smartphone
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
+    #[ORM\ManyToOne(inversedBy: 'smartphones')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Vendor $vendor = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getVendor(): ?string
-    {
-        return $this->vendor;
-    }
-
-    public function setVendor(string $vendor): static
-    {
-        $this->vendor = $vendor;
-
-        return $this;
-    }
 
     public function getType(): ?string
     {
@@ -120,6 +121,18 @@ class Smartphone
     public function setPicture(?string $picture): static
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getVendor(): ?Vendor
+    {
+        return $this->vendor;
+    }
+
+    public function setVendor(?Vendor $vendor): static
+    {
+        $this->vendor = $vendor;
 
         return $this;
     }
