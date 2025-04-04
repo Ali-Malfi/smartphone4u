@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SmartphoneController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+
+            <h1>{{ smartphone.type }}</h1>
+            <h1>{{ smartphone.price }}</h1>
+
+            <p>{{ smartphone.description }}</p>
+            <!-- Voeg hier andere details van de smartphone toe -->
+
+            <a href="{{ path('app_home') }}" class="btn btn-dark">Back</a>
+            <a href="{{ path('app_home') }}" class="btn btn-dark">delete</a>
+
+            <a href="{{ path('app_smartphone_delete', { 'id': smartphone.id }) }}" class="btn btn-dark">delete</a>
+
+        </div>
+    </div>
+
+    {% endblock %}

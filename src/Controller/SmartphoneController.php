@@ -66,9 +66,38 @@ final class SmartphoneController extends AbstractController
 
     }
 
+    // Route to show details of a specific smartphone
+//    #[Route('/smartphone/show/{id}', name: 'app_show_smartphone')]
+//    public function show(Smartphone $smartphone, Request $request, EntityManagerInterface $entityManager): Response
+//    {
+//        $smartphone = $entityManager->getRepository(Smartphone::class)->find($smartphone->getId()); // Find smartphone by ID
+//        return $this->render('smartphone/index.html.twig', [
+//
+//            'smartphone' => $smartphone,
+//        ]);
+//    }
 
+
+    #[Route('/smartphone/show/{id}', name: 'app_show_smartphone')]
+    public function show(Smartphone $smartphone, EntityManagerInterface $entityManager, int $id): Response
+    {
+
+        return $this->render('smartphone/show.html.twig', [
+            'smartphone' => $entityManager->getRepository(Smartphone::class)->find($id),
+        ]);
+    }
+
+    #[Route('/smartphone/show/delete/{id}', name: 'app_delete_smartphone')]
+    public function showDelete(Smartphone $smartphone, EntityManagerInterface $entityManager, int $id): Response
+    {
+
+        return $this->render('smartphone/delete.html.twig', [
+            'smartphone' => $entityManager->getRepository(Smartphone::class)->find($id),
+        ]);
+    }
     #[Route('/smartphone/delete/{id}', name: 'app_smartphone_delete')]
     public function delete(Smartphone $smartphone, EntityManagerInterface $entityManager): Response {
+
         $entityManager->remove($smartphone);
         $entityManager->flush();
         $this->addFlash('success', 'Boek is gewist');

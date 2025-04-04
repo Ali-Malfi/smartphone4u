@@ -41,8 +41,10 @@
                     <td>{{ smartphone.price }}</td>
                     <td>{{ smartphone.description }}</td>
                     <td>{{ smartphone.picture }}</td>
+                    <td><a href="{{ path('app_show_smartphone', { 'id': smartphone.id }) }}" class="btn btn-dark">details</a></td>
+
                     <td><a href="{{ path('app_smartphone_update', { 'id': smartphone.id }) }}" class="btn btn-dark">update</a></td>
-                    <td><a href="{{ path('app_smartphone_delete', { 'id': smartphone.id }) }}" class="btn btn-dark">delete</a></td>
+                    <td><a href="{{ path('app_delete_smartphone', { 'id': smartphone.id }) }}" class="btn btn-dark">delete</a></td>
 
                 </tr>
                 {% endfor %}
