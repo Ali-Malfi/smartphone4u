@@ -17,7 +17,14 @@
 {#                {{ form(form) }}#}
                 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                     {{ form_widget(form) }}
+                <div class="text-end pt-0">
+                    <a href="{{ path('app_home') }}" class="btn btn-secondary">Back</a>
+                </div>
+
                 {{ form_end(form) }}
+
+{#                test#}
+
             </div>
         </div>
     </div>
